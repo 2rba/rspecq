@@ -124,7 +124,7 @@ raise OptionParser::MissingArgument.new(:build) if opts[:build].nil?
 raise OptionParser::MissingArgument.new(:worker) if !opts[:report] && opts[:worker].nil?
 # rubocop:enable Style/RaiseArgs, Layout/EmptyLineAfterGuardClause
 
-redis_opts = {}
+redis_opts = { ssl_params: { ca_file: "spec/support/lib/ca_heroku.crt", verify_hostname: false, ssl_version: :TLSv1_2 } }
 
 if opts[:redis_url]
   redis_opts[:url] = opts[:redis_url]
